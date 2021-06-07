@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/first">
+        <file>library_registraion.png</file>
+        <file>login.png</file>
+        <file>close.png</file>
+    </qresource>
+</RCC>

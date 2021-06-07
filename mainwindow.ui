@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>624</width>
+    <height>395</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+background :url(:/first/library_registraion.png);
+}
+*{
+font-family:century gothic;
+font-size:17px;
+}
+QFrame
+{
+background: #333;
+}
+QToolButton
+{
+background: red;
+border-radius:20px;
+}
+QPushButton
+{
+color: white;
+background: red;
+border-radius:15px;
+}
+QLabel
+{
+color:white;
+}
+QPushButton:hover
+{
+color:#333;
+border-radius:15px;
+background: #379eff;
+}
+QLineEdit
+{
+background:transparent;
+border:none;
+color:#dddbff;
+border-bottom:1px solid #dddbff;
+font-size:15px;
+}
+#register_2
+{
+background:transparent;
+border:none;
+font-size:14px;
+color:red;
+}
+#register_2:hover
+{
+color:#379eff;
+
+}
+QTextBrowser
+{
+font-size :12px;
+color :#dddbff;
+}</string>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>30</y>
+      <width>181</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>20</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LOGIN HERE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="login">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LOG IN</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="username">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Username</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="password">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+     <property name="placeholderText">
+      <string>Password</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="register_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>did you register first?</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size = 5px;</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>10</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/first/login.png</normaloff>:/first/login.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>128</width>
+      <height>128</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
