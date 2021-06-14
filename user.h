@@ -12,7 +12,7 @@ class user : public QDialog
     Q_OBJECT
 
 public:
-    explicit user(int index,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
+    explicit user(int index,QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
     ~user();
 
 private slots:
@@ -31,6 +31,7 @@ private:
     Ui::user *ui;
     QList<user_pass>*info_user;
     QList<books>* info_book;
+    QList<QString>* groups;
     int index;
 };
 

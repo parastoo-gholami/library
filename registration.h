@@ -12,7 +12,7 @@ class registration : public QDialog
     Q_OBJECT
 
 public:
-    explicit registration(QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
+    explicit registration(QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
     ~registration();
 
 private slots:
@@ -24,6 +24,7 @@ private:
     Ui::registration *ui;
     QList<user_pass>* info_user;
     QList<books>* info_book;
+    QList<QString>* groups;
 };
 
 #endif // REGISTRATION_H

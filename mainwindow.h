@@ -13,7 +13,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
+    MainWindow(QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
     ~MainWindow();
 
 
@@ -24,10 +24,14 @@ private slots:
 
 
 
+
+
+
 private:
     Ui::MainWindow *ui;
     registration *page_r;
     QList<user_pass>*info_user;
     QList<books>* info_book;
+    QList<QString>* groups;
 };
 #endif // MAINWINDOW_H

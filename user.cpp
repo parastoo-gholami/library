@@ -2,7 +2,7 @@
 #include "ui_user.h"
 #include "mainwindow.h"
 #include "profile.h"
-user::user(int index,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
+user::user(int index,QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::user)
 {
@@ -10,6 +10,7 @@ user::user(int index,QList<books>* info_book,QList<user_pass>* info_user,QWidget
     this->info_user = info_user;
     this->info_book = info_book;
     this->index = index;
+    this->groups = groups;
     this->ui->welcom->setText(info_user->at(index).user);
 }
 
@@ -22,7 +23,7 @@ void user::on_exit_clicked()
 {
     MainWindow* page_m;
     hide();
-    page_m = new MainWindow(info_book,info_user);
+    page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }
 

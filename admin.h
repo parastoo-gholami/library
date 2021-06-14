@@ -13,7 +13,7 @@ class admin : public QDialog
     Q_OBJECT
 
 public:
-    explicit admin(int index,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
+    explicit admin(int index,QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
     ~admin();
 
 private slots:
@@ -28,10 +28,13 @@ private slots:
 
     void on_edit_clicked();
 
+    void on_view_g_clicked();
+
 private:
     Ui::admin *ui;
     QList<books>* info_book;
     QList<user_pass>* info_user;
+    QList<QString>* groups;
     int index;
 };
 

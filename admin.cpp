@@ -1,13 +1,14 @@
 #include "admin.h"
 #include "ui_admin.h"
 #include "mainwindow.h"
-admin::admin(int index,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
+admin::admin(int index,QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::admin)
 {
     ui->setupUi(this);
     this->info_user = info_user;
     this->info_book = info_book;
+    this->groups = groups;
     this->index = index;
 }
 
@@ -28,6 +29,21 @@ void admin::on_view_clicked()
         name.append(info_book->at(i).author);
         name.append(" /publisher: ");
         name.append(info_book->at(i).publisher);
+        name.append(" /groups: ");
+        if(info_book->at(i).groups.at(0) == nullptr)
+            name.append("-");
+         else
+        {
+            for(int j = 0;j < 3;j++)
+            {
+                if(j!=0)
+                    name.append(" ,");
+                if(info_book->at(i).groups.at(j) != nullptr)
+                    name.append(info_book->at(i).groups.at(j));
+                else
+                    break;
+            }
+        }
         if(info_book->at(i).available == "yes")
             name.append(" /available");
         else
@@ -67,6 +83,24 @@ void admin::on_add_clicked()
                     return;
                 }
     }
+    if((this->ui->group1->text()!= nullptr)&&(this->ui->group2->text()!= nullptr))
+        if((this->ui->group1->text()) ==(this->ui->group2->text()))
+        {
+            this->ui->show_3->setText("name of groups can be the same");
+            return;
+        }
+    if((this->ui->group1->text()!= nullptr)&&(this->ui->group3->text()!= nullptr))
+        if((this->ui->group1->text()) ==(this->ui->group3->text()))
+        {
+            this->ui->show_3->setText("name of groups can be the same");
+            return;
+        }
+    if((this->ui->group3->text()!= nullptr)&&(this->ui->group2->text()!= nullptr))
+        if((this->ui->group3->text()) ==(this->ui->group2->text()))
+        {
+            this->ui->show_3->setText("name of groups can be the same");
+            return;
+        }
     books tmp;
     tmp.who = "none";
     tmp.author = this->ui->author->text();
@@ -79,6 +113,34 @@ void admin::on_add_clicked()
     info_book->append(tmp);
     this->ui->show_3->setText("done");
 
+
+    bool flag = false;
+    if(this->ui->group1->text()!= nullptr)
+    {
+        for(int j = 0; j<groups->count();j++)
+            if(groups->at(j) ==  this->ui->group1->text())
+                flag = true;
+        if(!flag)
+            groups->append(this->ui->group1->text());
+    }
+    flag = false;
+    if(this->ui->group2->text()!= nullptr)
+    {
+        for(int j = 0; j<groups->count();j++)
+            if(groups->at(j) ==  this->ui->group2->text())
+                flag = true;
+        if(!flag)
+            groups->append(this->ui->group2->text());
+    }
+    flag = false;
+    if(this->ui->group3->text()!= nullptr)
+    {
+        for(int j = 0; j<groups->count();j++)
+            if(groups->at(j) ==  this->ui->group3->text())
+                flag = true;
+        if(!flag)
+            groups->append(this->ui->group3->text());
+    }
     this->ui->num->clear();
     this->ui->name->clear();
     this->ui->author->clear();
@@ -95,7 +157,7 @@ void admin::on_exit_clicked()
 {
     MainWindow* page_m;
     hide();
-    page_m = new MainWindow(info_book,info_user);
+    page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }
 
@@ -140,18 +202,71 @@ void admin::on_edit_clicked()
         if((*info_book)[i].groups.at(j) != nullptr)
             count++;
     }
-    if(this->ui->group1->text() != nullptr)
+    bool flag = false;
+    if(count == 3)
     {
-            (*info_book)[i].groups[0] = this->ui->group1->text();
+        (*info_book)[i].groups[0] = this->ui->group1->text();
+        (*info_book)[i].groups[1] = this->ui->group2->text();
+        (*info_book)[i].groups[2] = this->ui->group3->text();
+        for(int j = 0; j<groups->count();j++)
+            if(groups->at(j) ==  this->ui->group1->text())
+                flag = true;
+        if(!flag)
+            groups->append(this->ui->group1->text());
+        flag =false;
+        for(int j = 0; j<groups->count();j++)
+            if(groups->at(j) ==  this->ui->group2->text())
+                flag = true;
+        if(!flag)
+            groups->append(this->ui->group2->text());
+        flag = false;
+        for(int j = 0; j<groups->count();j++)
+            if(groups->at(j) ==  this->ui->group3->text())
+                flag = true;
+        if(!flag)
+            groups->append(this->ui->group3->text());
     }
-    if(this->ui->group2->text() != nullptr)
+    else
     {
-            (*info_book)[i].groups[1] = this->ui->group2->text();
+        if(this->ui->group1->text() != nullptr)
+        {
+                (*info_book)[i].groups[0] = this->ui->group1->text();
+            for(int j = 0; j<groups->count();j++)
+                if(groups->at(j) ==  this->ui->group1->text())
+                    flag = true;
+            if(!flag)
+                groups->append(this->ui->group1->text());
+        }
+        flag = false;
+        if(this->ui->group2->text() != nullptr)
+        {
+            if((*info_book)[i].groups[0] == nullptr)
+                (*info_book)[i].groups[0] = this->ui->group2->text();
+            else
+                (*info_book)[i].groups[1] = this->ui->group2->text();
+            for(int j = 0; j<groups->count();j++)
+                if(groups->at(j) ==  this->ui->group2->text())
+                    flag = true;
+            if(!flag)
+                groups->append(this->ui->group2->text());
+        }
+        flag = false;
+        if(this->ui->group3->text() != nullptr)
+        {
+            if((*info_book)[i].groups[0] == nullptr)
+                (*info_book)[i].groups[0] = this->ui->group3->text();
+            else if((*info_book)[i].groups[1] == nullptr)
+                (*info_book)[i].groups[1] = this->ui->group3->text();
+            else
+                (*info_book)[i].groups[2] = this->ui->group3->text();
+            for(int j = 0; j<groups->count();j++)
+                if(groups->at(j) ==  this->ui->group2->text())
+                    flag = true;
+            if(!flag)
+                groups->append(this->ui->group2->text());
+        }
     }
-    if(this->ui->group3->text() != nullptr)
-    {
-            (*info_book)[i].groups[2] = this->ui->group3->text();
-    }
+
     this->ui->show_3->setText("done");
     this->ui->num->clear();
     this->ui->name->clear();
@@ -161,6 +276,15 @@ void admin::on_edit_clicked()
     this->ui->group1->clear();
     this->ui->group2->clear();
     this->ui->group3->clear();
+
+}
+
+
+void admin::on_view_g_clicked()
+{
+    this->ui->show->clear();
+    for(int i = 0;i<groups->count();i++)
+        this->ui->show->append(groups->at(i));
 
 }
 

@@ -1,13 +1,15 @@
 #include "registration.h"
 #include "ui_registration.h"
 #include "mainwindow.h"
-registration::registration(QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
+registration::registration(QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::registration)
 {
     ui->setupUi(this);
     this->info_user = info_user;
     this->info_book = info_book;
+    this->groups = groups;
+
 }
 
 registration::~registration()
@@ -82,7 +84,7 @@ void registration::on_signup_clicked()
     info_user->append(tmp);
     MainWindow* page_m;
     hide();
-    page_m = new MainWindow(info_book,info_user);
+    page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }
 
@@ -92,7 +94,7 @@ void registration::on_exit_clicked()
 {
     MainWindow* page_m;
     hide();
-    page_m = new MainWindow(info_book,info_user);
+    page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }
 

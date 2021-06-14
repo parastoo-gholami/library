@@ -3,17 +3,30 @@
 #include "registration.h"
 #include "admin.h"
 #include "user.h"
-MainWindow::MainWindow(QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent)
+MainWindow::MainWindow(QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     this->info_user = info_user;
     this->info_book = info_book;
+    this->groups = groups;
+
 }
 
 MainWindow::~MainWindow()
 {
+//    {
+//        QFile file("groups.txt");
+//        if(!file.open(QFile::WriteOnly|QFile::Text))
+//            return;
+//        QTextStream qts(&file);
+//        for(int i = 0;i<groups->count();i++)
+//        {
+//            qts<<groups->at(i) + "\n";
+//        }
+//    }
+
     {
         QFile file("user_pass.txt");
         if(!file.open(QFile::WriteOnly|QFile::Text))
@@ -78,14 +91,14 @@ void MainWindow::on_login_clicked()
                 {
                     hide();
                     admin* page_a;
-                    page_a = new admin(i,info_book,info_user);
+                    page_a = new admin(i,groups,info_book,info_user);
                     page_a->show();
                 }
                 else
                 {
                     user *page_u;
                     hide();
-                    page_u = new user(i,info_book,info_user);
+                    page_u = new user(i,groups,info_book,info_user);
                     page_u->show();
                 }
             }
@@ -97,9 +110,15 @@ void MainWindow::on_login_clicked()
 void MainWindow::on_register_2_clicked()
 {
     hide();
-    page_r = new registration(info_book,info_user);
+    page_r = new registration(groups,info_book,info_user);
     page_r->show();
 }
+
+
+
+
+
+
 
 
 
