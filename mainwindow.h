@@ -13,19 +13,21 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QList<user_pass>* info_user,QWidget *parent = nullptr);
+    MainWindow(QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private slots:
     void on_login_clicked();
 
     void on_register_2_clicked();
 
+
+
 private:
     Ui::MainWindow *ui;
     registration *page_r;
-    admin* page_a;
-    user *page_u;
     QList<user_pass>*info_user;
+    QList<books>* info_book;
 };
 #endif // MAINWINDOW_H

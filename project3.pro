@@ -12,6 +12,7 @@ SOURCES += \
     admin.cpp \
     main.cpp \
     mainwindow.cpp \
+    profile.cpp \
     registration.cpp \
     user.cpp
 
@@ -19,12 +20,14 @@ HEADERS += \
     admin.h \
     libraries.h \
     mainwindow.h \
+    profile.h \
     registration.h \
     user.h
 
 FORMS += \
     admin.ui \
     mainwindow.ui \
+    profile.ui \
     registration.ui \
     user.ui
 

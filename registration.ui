@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
+    <width>620</width>
     <height>401</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">QWidget
 {
-background:url(:/first/library_registraion.png);
+background:url(:/first/lib.jpg);
 }
 *{
 font-family:century gothic;
@@ -108,25 +108,6 @@ color:#dddbff;
      <string>Sign Up</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="username">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>90</y>
-      <width>201</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="placeholderText">
-     <string>Username...</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="name">
     <property name="geometry">
      <rect>
@@ -141,6 +122,9 @@ color:#dddbff;
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="cursorPosition">
+     <number>0</number>
     </property>
     <property name="placeholderText">
      <string>Name...</string>
@@ -235,14 +219,55 @@ color:#dddbff;
    <widget class="QPushButton" name="signup">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>330</x>
       <y>170</y>
-      <width>141</width>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>SIGN UP</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="username">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>90</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>Username...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>170</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>century gothic</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>LOG IN</string>
     </property>
    </widget>
   </widget>

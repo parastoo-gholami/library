@@ -12,15 +12,18 @@ class registration : public QDialog
     Q_OBJECT
 
 public:
-    explicit registration(QList<user_pass>* info_user,QWidget *parent = nullptr);
+    explicit registration(QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent = nullptr);
     ~registration();
 
 private slots:
     void on_signup_clicked();
 
+    void on_exit_clicked();
+
 private:
     Ui::registration *ui;
     QList<user_pass>* info_user;
+    QList<books>* info_book;
 };
 
 #endif // REGISTRATION_H

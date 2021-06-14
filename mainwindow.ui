@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
+    <width>619</width>
     <height>395</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">QWidget
 {
-background :url(:/first/library_registraion.png);
+background:url(:/first/lib.jpg);
 }
 *{
 font-family:century gothic;
@@ -71,6 +71,18 @@ QTextBrowser
 {
 font-size :12px;
 color :#dddbff;
+}
+#exit
+{
+background : transparent;
+border-color:rgb(48, 64, 66,0.75);
+fonr-size:16px;
+color:red;
+border-radius: 10px;
+}
+#exit:hover
+{
+color:#379eff;
 }</string>
   </property>
   <property name="toolButtonStyle">
