@@ -476,6 +476,6 @@ void admin::on_ok_clicked()
         }
     }
     if(!flag)
-       this->ui->show_3->append("nothing found");
+       this->ui->show->append("nothing found");
 }
 
