@@ -27,6 +27,10 @@ private slots:
 
     void on_profile_clicked();
 
+    void on_view_g_clicked();
+
+    void on_ok_clicked();
+
 private:
     Ui::user *ui;
     QList<user_pass>*info_user;

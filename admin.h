@@ -30,6 +30,8 @@ private slots:
 
     void on_view_g_clicked();
 
+    void on_ok_clicked();
+
 private:
     Ui::admin *ui;
     QList<books>* info_book;

@@ -16,16 +16,16 @@ MainWindow::MainWindow(QList<QString>* groups,QList<books>* info_book,QList<user
 
 MainWindow::~MainWindow()
 {
-//    {
-//        QFile file("groups.txt");
-//        if(!file.open(QFile::WriteOnly|QFile::Text))
-//            return;
-//        QTextStream qts(&file);
-//        for(int i = 0;i<groups->count();i++)
-//        {
-//            qts<<groups->at(i) + "\n";
-//        }
-//    }
+    {
+        QFile file("groups.txt");
+        if(!file.open(QFile::WriteOnly|QFile::Text))
+            return;
+        QTextStream qts(&file);
+        for(int i = 0;i<groups->count();i++)
+        {
+            qts<<groups->at(i) + "\n";
+        }
+    }
 
     {
         QFile file("user_pass.txt");

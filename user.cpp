@@ -33,12 +33,28 @@ void user::on_view_clicked()
     this->ui->show->clear();
     for(int i=0;i<(*info_book).count();++i)
     {
-        QString name="name: ";
+        QString name=QString::number(i+1);
+        name.append(".  name: ");
         name.append(info_book->at(i).name);
         name.append(" /author: ");
         name.append(info_book->at(i).author);
         name.append(" /publisher: ");
         name.append(info_book->at(i).publisher);
+        name.append(" /groups: ");
+        if(info_book->at(i).groups.at(0) == nullptr)
+            name.append("-");
+         else
+        {
+            for(int j = 0;j < 3;j++)
+            {
+                if(j!=0)
+                    name.append(" ,");
+                if(info_book->at(i).groups.at(j) != nullptr)
+                    name.append(info_book->at(i).groups.at(j));
+                else
+                    break;
+            }
+        }
         if(info_book->at(i).available == "yes")
             name.append(" /available");
         else
@@ -105,5 +121,63 @@ void user::on_profile_clicked()
     hide();
     page_p = new profile();
     page_p->show();
+}
+
+
+void user::on_view_g_clicked()
+{
+    this->ui->show->clear();
+    for(int i = 0;i<groups->count();i++)
+        this->ui->show->append(groups->at(i));
+}
+
+
+void user::on_ok_clicked()
+{
+
+    if(this->ui->search->text() == nullptr)
+        return;
+    this->ui->show_3->clear();
+    bool flag = false;
+    if(this->ui->group->isChecked())
+    {
+
+        int count = 0;
+        QString search = this->ui->search->text();
+        for(int i = 0; i < groups->count(); i++)
+        {
+            if(groups->at(i).contains(search))
+            {
+                flag =true;
+                this->ui->show_3->append(groups->at(i));
+                for(int j = 0;j<info_book->count();j++)
+                {
+                    for(int z = 0;z < 3;z++)
+                        if(info_book->at(j).groups.at(z) == groups->at(i))
+                        {
+                            count++;
+                            QString name=QString::number(count);
+                            name.append(".  name: ");
+                            name.append(info_book->at(j).name);
+                            name.append(" /author: ");
+                            name.append(info_book->at(j).author);
+                            name.append(" /publisher: ");
+                            name.append(info_book->at(j).publisher);
+                            if(info_book->at(j).available == "yes")
+                                name.append(" /available");
+                            else
+                                name.append(" /not available");
+                            this->ui->show_3->append(name);
+                        }
+                }
+            }
+        }
+    }
+    else
+    {
+
+    }
+    if(!flag)
+       this->ui->show_3->append("nothing found");
 }
 
