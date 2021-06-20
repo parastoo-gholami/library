@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     admin.cpp \
+    forget_pass.cpp \
     main.cpp \
     mainwindow.cpp \
     profile.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     admin.h \
+    forget_pass.h \
     libraries.h \
     mainwindow.h \
     profile.h \
@@ -26,6 +28,7 @@ HEADERS += \
 
 FORMS += \
     admin.ui \
+    forget_pass.ui \
     mainwindow.ui \
     profile.ui \
     registration.ui \

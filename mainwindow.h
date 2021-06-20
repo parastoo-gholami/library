@@ -3,6 +3,7 @@
 #include "registration.h"
 #include "admin.h"
 #include "user.h"
+#include "forget_pass.h"
 #include <QMainWindow>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,9 +28,12 @@ private slots:
 
 
 
+    void on_forget_clicked();
+
 private:
     Ui::MainWindow *ui;
     registration *page_r;
+
     QList<user_pass>*info_user;
     QList<books>* info_book;
     QList<QString>* groups;

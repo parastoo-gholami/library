@@ -9,7 +9,6 @@ registration::registration(QList<QString>* groups,QList<books>* info_book,QList<
     this->info_user = info_user;
     this->info_book = info_book;
     this->groups = groups;
-
 }
 
 registration::~registration()

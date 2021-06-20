@@ -3,6 +3,7 @@
 #include "registration.h"
 #include "admin.h"
 #include "user.h"
+#include<QDate>
 MainWindow::MainWindow(QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -11,12 +12,22 @@ MainWindow::MainWindow(QList<QString>* groups,QList<books>* info_book,QList<user
     this->info_user = info_user;
     this->info_book = info_book;
     this->groups = groups;
-
+    QDate today(QDate::currentDate());
+    this->ui->date->setText(today.toString("dd.MM.yyyy"));
+    this->ui->all->setText(QString::number(info_book->count()));
+    int count = 0;
+    for(int i = 0;i<info_book->count();i++)
+    {
+        if(info_book->at(i).available == "no")
+            count++;
+    }
+    this->ui->amanat->setText(QString::number(count));
 }
 
 MainWindow::~MainWindow()
 {
     {
+
         QFile file("groups.txt");
         if(!file.open(QFile::WriteOnly|QFile::Text))
             return;
@@ -116,13 +127,11 @@ void MainWindow::on_register_2_clicked()
 
 
 
-
-
-
-
-
-
-
-
-
+void MainWindow::on_forget_clicked()
+{
+    hide();
+    forget_pass *page_fp;
+    page_fp = new forget_pass(groups,info_book,info_user);
+    page_fp->show();
+}
 
