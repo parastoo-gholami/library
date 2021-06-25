@@ -12,6 +12,14 @@ user::user(int index,QList<QString>* groups,QList<books>* info_book,QList<user_p
     this->index = index;
     this->groups = groups;
     this->ui->welcom->setText(info_user->at(index).user);
+    int count = 0;
+    for(int i = 0;i<info_book->count();i++)
+    {
+        if(info_book->at(i).available == "no")
+            count++;
+    }
+    this->ui->amanat->setText(QString::number(count));
+    this->ui->all->setText(QString::number(info_book->count()));
 }
 
 user::~user()
@@ -140,12 +148,7 @@ void user::on_ok_clicked()
     this->ui->show_3->clear();
     if(!(((this->ui->publisher_2->isChecked())||(this->ui->name_2->isChecked()))||((this->ui->group->isChecked())||(this->ui->author_2->isChecked()))))
         this->ui->show_3->setText("check one of the buttons");
-    if(this->ui->search->text().count() == 1)
-    {
-        this->ui->show_3->setText("you must use more letters");
-    }
     bool flag = false;
-
     if(this->ui->group->isChecked())
     {
         int count = 0;
@@ -153,162 +156,194 @@ void user::on_ok_clicked()
         for(int i = 0; i < groups->count(); i++)
         {
             count = 0;
-            if(groups->at(i).contains(search))
+            QList<QString> spliting = groups->at(i).split(" ");
+            for(int j = 0;j<spliting.count();j++)
             {
-                flag = true;
-                this->ui->show_3->append(groups->at(i));
-                for(int j = 0;j<info_book->count();j++)
+                if(spliting.at(j).startsWith(search))
                 {
-                    for(int z = 0;z < 3;z++)
-                        if(info_book->at(j).groups.at(z) == groups->at(i))
-                        {
-                            count++;
-                            QString name=QString::number(count);
-                            name.append(".  name: ");
-                            name.append(info_book->at(j).name);
-                            name.append(" /author: ");
-                            name.append(info_book->at(j).author);
-                            name.append(" /publisher: ");
-                            name.append(info_book->at(j).publisher);
-                            if(info_book->at(j).available == "yes")
-                                name.append(" /available");
-                            else
+                    flag= true;
+                    QString group;
+                    group.append("  *");
+                    group.append(groups->at(i));
+                    this->ui->show_3->append(group);
+                    for(int j = 0;j<info_book->count();j++)
+                    {
+                        for(int z = 0;z < 3;z++)
+                            if(info_book->at(j).groups.at(z) == groups->at(i))
                             {
-                                name.append(" /not available");
+                                count++;
+                                QString name=QString::number(count);
+                                name.append(".  name: ");
+                                name.append(info_book->at(j).name);
+                                name.append(" /author: ");
+                                name.append(info_book->at(j).author);
+                                name.append(" /publisher: ");
+                                name.append(info_book->at(j).publisher);
+                                if(info_book->at(j).available == "yes")
+                                    name.append(" /available");
+                                else
+                                {
+                                    name.append(" /not available");
+                                }
+                                this->ui->show_3->append(name);
                             }
-                            this->ui->show_3->append(name);
-                        }
+                    }
+                    break;
                 }
             }
         }
     }
     else if(this->ui->publisher_2->isChecked())
     {
-        int count =0;
+        int count = 0;
         QString search = this->ui->search->text();
-        for(int i = 0; i < info_book->count();i++)
+        for(int i = 0; i < info_book->count(); i++)
         {
-            if(info_book->at(i).publisher.contains(search))
+            QList<QString> spliting = info_book->at(i).publisher.split(" ");
+            for(int j = 0;j<spliting.count();j++)
             {
-                flag = true;
-                count++;
-                QString name=QString::number(count);
-                name.append(".  name: ");
-                name.append(info_book->at(i).name);
-                name.append(" /author: ");
-                name.append(info_book->at(i).author);
-                name.append(" /publisher: ");
-                name.append(info_book->at(i).publisher);
-                name.append(" /groups: ");
-                if(info_book->at(i).groups.at(0) == nullptr)
-                    name.append("-");
-                 else
+                if(spliting.at(j).startsWith(search))
                 {
-                    for(int j = 0;j < 3;j++)
+                    flag= true;
+                    count++;
+                    QString name="  ";
+                    name.append(QString::number(count));
+                    name.append(".  name: ");
+                    name.append(info_book->at(i).name);
+                    name.append(" /author: ");
+                    name.append(info_book->at(i).author);
+                    name.append(" /publisher: ");
+                    name.append(info_book->at(i).publisher);
+                    name.append(" /groups: ");
+                    if(info_book->at(i).groups.at(0) == nullptr)
+                        name.append("-");
+                    else
                     {
-                        if(j!=0)
-                            name.append(" ,");
-                        if(info_book->at(i).groups.at(j) != nullptr)
-                            name.append(info_book->at(i).groups.at(j));
-                        else
-                            break;
+                        for(int j = 0;j < 3;j++)
+                        {
+                            if(info_book->at(i).groups.at(j) != nullptr)
+                            {
+                                if(j!=0)
+                                    name.append(" ,");
+                                name.append(info_book->at(i).groups.at(j));
+                            }
+                            else
+                                break;
+                        }
                     }
+                    if(info_book->at(i).available == "yes")
+                        name.append(" /available");
+                    else
+                        {
+                            name.append(" /not available");
+                        }
+                        this->ui->show_3->append(name);
+                    break;
                 }
-                if(info_book->at(i).available == "yes")
-                    name.append(" /available");
-                else
-                {
-                    name.append(" /not available");
-                }
-                this->ui->show_3->append(name);
             }
         }
     }
     else if(this->ui->author_2->isChecked())
     {
-        int count =0;
+        int count = 0;
         QString search = this->ui->search->text();
-        for(int i = 0; i < info_book->count();i++)
+        for(int i = 0; i < info_book->count(); i++)
         {
-            if(info_book->at(i).author.contains(search))
+            QList<QString> spliting = info_book->at(i).author.split(" ");
+            for(int j = 0;j<spliting.count();j++)
             {
-                flag = true;
-                count++;
-                QString name=QString::number(count);
-                name.append(".  name: ");
-                name.append(info_book->at(i).name);
-                name.append(" /author: ");
-                name.append(info_book->at(i).author);
-                name.append(" /publisher: ");
-                name.append(info_book->at(i).publisher);
-                name.append(" /groups: ");
-                if(info_book->at(i).groups.at(0) == nullptr)
-                    name.append("-");
-                 else
+                if(spliting.at(j).startsWith(search))
                 {
-                    for(int j = 0;j < 3;j++)
+                    flag= true;
+                    count++;
+                    QString name="  ";
+                    name.append(QString::number(count));
+                    name.append(".  name: ");
+                    name.append(info_book->at(i).name);
+                    name.append(" /author: ");
+                    name.append(info_book->at(i).author);
+                    name.append(" /publisher: ");
+                    name.append(info_book->at(i).publisher);
+                    name.append(" /groups: ");
+                    if(info_book->at(i).groups.at(0) == nullptr)
+                        name.append("-");
+                    else
                     {
-                        if(j!=0)
-                            name.append(" ,");
-                        if(info_book->at(i).groups.at(j) != nullptr)
-                            name.append(info_book->at(i).groups.at(j));
-                        else
-                            break;
+                        for(int j = 0;j < 3;j++)
+                        {
+                            if(info_book->at(i).groups.at(j) != nullptr)
+                            {
+                                if(j!=0)
+                                    name.append(" ,");
+                                name.append(info_book->at(i).groups.at(j));
+                            }
+                            else
+                                break;
+                        }
                     }
+                    if(info_book->at(i).available == "yes")
+                        name.append(" /available");
+                    else
+                        {
+                            name.append(" /not available");
+                        }
+                        this->ui->show_3->append(name);
+                    break;
                 }
-                if(info_book->at(i).available == "yes")
-                    name.append(" /available");
-                else
-                {
-                    name.append(" /not available");
-                }
-                this->ui->show_3->append(name);
             }
         }
     }
     else if(this->ui->name_2->isChecked())
     {
-        int count =0;
+        int count = 0;
         QString search = this->ui->search->text();
-        for(int i = 0; i < info_book->count();i++)
+        for(int i = 0; i < info_book->count(); i++)
         {
-            if(info_book->at(i).name.contains(search))
+            QList<QString> spliting = info_book->at(i).name.split(" ");
+            for(int j = 0;j<spliting.count();j++)
             {
-                flag = true;
-                count++;
-                QString name=QString::number(count);
-                name.append(".  name: ");
-                name.append(info_book->at(i).name);
-                name.append(" /author: ");
-                name.append(info_book->at(i).author);
-                name.append(" /publisher: ");
-                name.append(info_book->at(i).publisher);
-                name.append(" /groups: ");
-                if(info_book->at(i).groups.at(0) == nullptr)
-                    name.append("-");
-                 else
+                if(spliting.at(j).startsWith(search))
                 {
-                    for(int j = 0;j < 3;j++)
+                    flag= true;
+                    count++;
+                    QString name="  ";
+                    name.append(QString::number(count));
+                    name.append(".  name: ");
+                    name.append(info_book->at(i).name);
+                    name.append(" /author: ");
+                    name.append(info_book->at(i).author);
+                    name.append(" /publisher: ");
+                    name.append(info_book->at(i).publisher);
+                    name.append(" /groups: ");
+                    if(info_book->at(i).groups.at(0) == nullptr)
+                        name.append("-");
+                    else
                     {
-                        if(j!=0)
-                            name.append(" ,");
-                        if(info_book->at(i).groups.at(j) != nullptr)
-                            name.append(info_book->at(i).groups.at(j));
-                        else
-                            break;
+                        for(int j = 0;j < 3;j++)
+                        {
+                            if(info_book->at(i).groups.at(j) != nullptr)
+                            {
+                                if(j!=0)
+                                    name.append(" ,");
+                                name.append(info_book->at(i).groups.at(j));
+                            }
+                            else
+                                break;
+                        }
                     }
+                    if(info_book->at(i).available == "yes")
+                        name.append(" /available");
+                    else
+                        {
+                            name.append(" /not available");
+                        }
+                        this->ui->show_3->append(name);
+                    break;
                 }
-                if(info_book->at(i).available == "yes")
-                    name.append(" /available");
-                else
-                {
-                    name.append(" /not available");
-                }
-                this->ui->show_3->append(name);
             }
         }
     }
     if(!flag)
-       this->ui->show_3->append("nothing found");
+        this->ui->show_3->append("nothing found");
 }
 
