@@ -68,7 +68,7 @@ void forget_pass::on_exit_clicked()
 void forget_pass::on_signup_clicked()
 {
     MainWindow *page_m;
-    hide();
+    close();
     page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }

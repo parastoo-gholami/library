@@ -20,5 +20,7 @@ public:
     QList<QString> groups;
     QString available = "yes";
     QString who="none";
+    QString from;
+    QString to;
 };
 

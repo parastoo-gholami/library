@@ -164,7 +164,7 @@ void admin::on_add_clicked()
 void admin::on_exit_clicked()
 {
     MainWindow* page_m;
-    hide();
+    close();
     page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }

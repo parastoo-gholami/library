@@ -100,15 +100,15 @@ void MainWindow::on_login_clicked()
             {
                 if(this->ui->username->text() == "Admin")
                 {
-                    hide();
                     admin* page_a;
+                    close();
                     page_a = new admin(i,groups,info_book,info_user);
                     page_a->show();
                 }
                 else
                 {
                     user *page_u;
-                    hide();
+                    close();
                     page_u = new user(i,groups,info_book,info_user);
                     page_u->show();
                 }
@@ -120,7 +120,7 @@ void MainWindow::on_login_clicked()
 
 void MainWindow::on_register_2_clicked()
 {
-    hide();
+    close();
     page_r = new registration(groups,info_book,info_user);
     page_r->show();
 }
@@ -129,7 +129,7 @@ void MainWindow::on_register_2_clicked()
 
 void MainWindow::on_forget_clicked()
 {
-    hide();
+    close();
     forget_pass *page_fp;
     page_fp = new forget_pass(groups,info_book,info_user);
     page_fp->show();

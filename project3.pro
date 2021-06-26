@@ -13,7 +13,7 @@ SOURCES += \
     forget_pass.cpp \
     main.cpp \
     mainwindow.cpp \
-    profile.cpp \
+    profile_u.cpp \
     registration.cpp \
     user.cpp
 
@@ -22,7 +22,7 @@ HEADERS += \
     forget_pass.h \
     libraries.h \
     mainwindow.h \
-    profile.h \
+    profile_u.h \
     registration.h \
     user.h
 
@@ -30,7 +30,7 @@ FORMS += \
     admin.ui \
     forget_pass.ui \
     mainwindow.ui \
-    profile.ui \
+    profile_u.ui \
     registration.ui \
     user.ui
 

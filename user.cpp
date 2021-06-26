@@ -1,7 +1,8 @@
 #include "user.h"
 #include "ui_user.h"
 #include "mainwindow.h"
-#include "profile.h"
+#include "profile_u.h"
+#include <QDate>
 user::user(int index,QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::user)
@@ -30,7 +31,7 @@ user::~user()
 void user::on_exit_clicked()
 {
     MainWindow* page_m;
-    hide();
+    close();
     page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
 }
@@ -91,6 +92,9 @@ void user::on_borrow_clicked()
             this->ui->show_2->setText("done");
             (*info_user)[index].num++;
             (*info_book)[i].who = info_user->at(index).user;
+            QDate today(QDate::currentDate());
+            (*info_book)[i].from = today.toString("dd.MM.yyyy");
+            (*info_book)[i].to = today.addDays(10).toString("dd.MM.yyyy");
             return;
         }
     }
@@ -125,9 +129,11 @@ void user::on_returnbook_clicked()
 }
 void user::on_profile_clicked()
 {
-    profile* page_p;
-    hide();
-    page_p = new profile();
+    //profile* page_p;
+    profile_u* page_p;
+    close();
+    //page_p = new profile(index,groups,info_book,info_user);
+    page_p = new profile_u(index,groups,info_book,info_user);
     page_p->show();
 }
 
