@@ -27,6 +27,7 @@ admin::~admin()
 
 void admin::on_view_clicked()
 {
+    this->ui->show_3->clear();
     this->ui->show->clear();
     for(int i=0;i<(*info_book).count();++i)
     {
@@ -44,10 +45,12 @@ void admin::on_view_clicked()
         {
             for(int j = 0;j < 3;j++)
             {
-                if(j!=0)
-                    name.append(" ,");
                 if(info_book->at(i).groups.at(j) != nullptr)
+                {
+                    if(j!=0)
+                        name.append(" ,");
                     name.append(info_book->at(i).groups.at(j));
+                }
                 else
                     break;
             }
@@ -157,7 +160,14 @@ void admin::on_add_clicked()
     this->ui->group1->clear();
     this->ui->group2->clear();
     this->ui->group3->clear();
-
+    int count = 0;
+    for(int i = 0;i<info_book->count();i++)
+    {
+        if(info_book->at(i).available == "no")
+            count++;
+    }
+    this->ui->amanat->setText(QString::number(count));
+    this->ui->all->setText(QString::number(info_book->count()));
 }
 
 
@@ -177,8 +187,35 @@ void admin::on_remove_clicked()
         this->ui->show_3->setText("enter the number of the book");
         return;
     }
-    info_book->removeAt((this->ui->num->text().toInt() - 1));
-    this->ui->show_3->setText("done");
+    int book_index;
+    bool flag = false;
+    book_index =this->ui->num->text().toInt() - 1;
+    for(int j = 0; j < 3; j++)
+    {
+        if((*info_book)[book_index].groups.at(j) ==nullptr)
+            break;
+        for(int i = 0; i < info_book->count(); i++)
+        {
+            if(i == book_index)
+                continue;
+            for(int z = 0; z < 3; z++)
+            {
+                if((*info_book)[i].groups.at(z) ==nullptr)
+                    break;
+                if((*info_book)[book_index].groups.at(j) == (*info_book)[i].groups.at(z))
+                    flag = true;
+            }
+        }
+        if(flag == false)
+            for(int z = 0;z<groups->count();z++)
+            {
+                if((*info_book)[book_index].groups[j] == groups->at(z))
+                    groups->removeAt(z);
+            }
+        flag = false;
+    }
+    info_book->removeAt((book_index));
+    this->ui->show_3->setText("press view to update the list");
     this->ui->num->clear();
     this->ui->name->clear();
     this->ui->author->clear();
@@ -187,6 +224,14 @@ void admin::on_remove_clicked()
     this->ui->group1->clear();
     this->ui->group2->clear();
     this->ui->group3->clear();
+    int count = 0;
+    for(int i = 0;i<info_book->count();i++)
+    {
+        if(info_book->at(i).available == "no")
+            count++;
+    }
+    this->ui->amanat->setText(QString::number(count));
+    this->ui->all->setText(QString::number(info_book->count()));
 }
 
 
@@ -198,81 +243,80 @@ void admin::on_edit_clicked()
         return;
     }
     int i = (this->ui->num->text().toInt() - 1);
-    if(this->ui->name->text() != nullptr)
+    if(this->ui->name->text() != info_book->at(i).name)
         (*info_book)[i].name = this->ui->name->text();
-    if(this->ui->author->text() != nullptr)
+    if(this->ui->author->text() != info_book->at(i).author)
         (*info_book)[i].author = this->ui->author->text();
-    if(this->ui->publisher->text() != nullptr)
+    if(this->ui->publisher->text() != info_book->at(i).publisher)
         (*info_book)[i].publisher = this->ui->publisher->text();
-    int count = 0;
-    for(int j = 0;j<3;j++)
+    if(this->ui->group1->text() != info_book->at(i).groups[0])
     {
-        if((*info_book)[i].groups.at(j) != nullptr)
-            count++;
-    }
-    bool flag = false;
-    if(count == 3)
-    {
+        bool flag = false;
+            for(int s = 0; s < info_book->count(); s++)
+            {
+                if(s == i)
+                    continue;
+                for(int z = 0; z < 3; z++)
+                {
+                if((*info_book)[s].groups.at(z) ==nullptr)
+                    break;
+                if((*info_book)[i].groups.at(0) == (*info_book)[s].groups.at(z))
+                    flag = true;
+                }
+            }
+            if(flag == false)
+                for(int z = 0;z<groups->count();z++)
+                {
+                if((*info_book)[i].groups[0] == groups->at(z))
+                    groups->removeAt(z);
+                }
         (*info_book)[i].groups[0] = this->ui->group1->text();
-        (*info_book)[i].groups[1] = this->ui->group2->text();
-        (*info_book)[i].groups[2] = this->ui->group3->text();
-        for(int j = 0; j<groups->count();j++)
-            if(groups->at(j) ==  this->ui->group1->text())
-                flag = true;
-        if(!flag)
-            groups->append(this->ui->group1->text());
-        flag =false;
-        for(int j = 0; j<groups->count();j++)
-            if(groups->at(j) ==  this->ui->group2->text())
-                flag = true;
-        if(!flag)
-            groups->append(this->ui->group2->text());
-        flag = false;
-        for(int j = 0; j<groups->count();j++)
-            if(groups->at(j) ==  this->ui->group3->text())
-                flag = true;
-        if(!flag)
-            groups->append(this->ui->group3->text());
     }
-    else
+    if(this->ui->group2->text() != info_book->at(i).groups[1])
     {
-        if(this->ui->group1->text() != nullptr)
-        {
-                (*info_book)[i].groups[0] = this->ui->group1->text();
-            for(int j = 0; j<groups->count();j++)
-                if(groups->at(j) ==  this->ui->group1->text())
+        bool flag = false;
+            for(int s = 0; s < info_book->count(); s++)
+            {
+                if(s == i)
+                    continue;
+                for(int z = 0; z < 3; z++)
+                {
+                if((*info_book)[s].groups.at(z) ==nullptr)
+                    break;
+                if((*info_book)[i].groups.at(1) == (*info_book)[s].groups.at(z))
                     flag = true;
-            if(!flag)
-                groups->append(this->ui->group1->text());
-        }
-        flag = false;
-        if(this->ui->group2->text() != nullptr)
-        {
-            if((*info_book)[i].groups[0] == nullptr)
-                (*info_book)[i].groups[0] = this->ui->group2->text();
-            else
-                (*info_book)[i].groups[1] = this->ui->group2->text();
-            for(int j = 0; j<groups->count();j++)
-                if(groups->at(j) ==  this->ui->group2->text())
+                }
+            }
+            if(flag == false)
+                for(int z = 0;z<groups->count();z++)
+                {
+                if((*info_book)[i].groups[1] == groups->at(z))
+                    groups->removeAt(z);
+                }
+        (*info_book)[i].groups[1] = this->ui->group2->text();
+    }
+    if(this->ui->group3->text() != info_book->at(i).groups[2])
+    {
+        bool flag = false;
+            for(int s = 0; s < info_book->count(); s++)
+            {
+                if(s == i)
+                    continue;
+                for(int z = 0; z < 3; z++)
+                {
+                if((*info_book)[s].groups.at(z) ==nullptr)
+                    break;
+                if((*info_book)[i].groups.at(2) == (*info_book)[s].groups.at(z))
                     flag = true;
-            if(!flag)
-                groups->append(this->ui->group2->text());
-        }
-        flag = false;
-        if(this->ui->group3->text() != nullptr)
-        {
-            if((*info_book)[i].groups[0] == nullptr)
-                (*info_book)[i].groups[0] = this->ui->group3->text();
-            else if((*info_book)[i].groups[1] == nullptr)
-                (*info_book)[i].groups[1] = this->ui->group3->text();
-            else
-                (*info_book)[i].groups[2] = this->ui->group3->text();
-            for(int j = 0; j<groups->count();j++)
-                if(groups->at(j) ==  this->ui->group2->text())
-                    flag = true;
-            if(!flag)
-                groups->append(this->ui->group2->text());
-        }
+                }
+            }
+            if(flag == false)
+                for(int z = 0;z<groups->count();z++)
+                {
+                if((*info_book)[i].groups[0] == groups->at(z))
+                    groups->removeAt(z);
+                }
+        (*info_book)[i].groups[2] = this->ui->group3->text();
     }
 
     this->ui->show_3->setText("done");
@@ -290,6 +334,7 @@ void admin::on_edit_clicked()
 
 void admin::on_view_g_clicked()
 {
+    this->ui->show_3->clear();
     this->ui->show->clear();
     for(int i = 0;i<groups->count();i++)
         this->ui->show->append(groups->at(i));
@@ -301,9 +346,13 @@ void admin::on_ok_clicked()
 {
     if(this->ui->search->text() == nullptr)
         return;
-    this->ui->show_3->clear();
+    this->ui->show->clear();
     if(!(((this->ui->publisher_2->isChecked())||(this->ui->name_2->isChecked()))||((this->ui->group->isChecked())||(this->ui->author_2->isChecked()))))
-        this->ui->show_3->setText("check one of the buttons");
+    {
+
+        this->ui->show->setText("check one of the buttons");
+        return;
+    }
     bool flag = false;
     if(this->ui->group->isChecked())
     {
@@ -342,7 +391,7 @@ void admin::on_ok_clicked()
                                     name.append(" /not available-borrowed by ");
                                     name.append(info_book->at(j).who);
                                 }
-                                this->ui->show_3->append(name);
+                                this->ui->show->append(name);
                             }
                     }
                     break;
@@ -395,7 +444,7 @@ void admin::on_ok_clicked()
                         name.append(" /not available-borrowed by ");
                         name.append(info_book->at(j).who);
                     }
-                        this->ui->show_3->append(name);
+                        this->ui->show->append(name);
                     break;
                 }
             }
@@ -446,7 +495,7 @@ void admin::on_ok_clicked()
                         name.append(" /not available-borrowed by ");
                         name.append(info_book->at(j).who);
                     }
-                        this->ui->show_3->append(name);
+                        this->ui->show->append(name);
                     break;
                 }
             }
@@ -497,13 +546,54 @@ void admin::on_ok_clicked()
                         name.append(" /not available-borrowed by ");
                         name.append(info_book->at(j).who);
                     }
-                        this->ui->show_3->append(name);
+                        this->ui->show->append(name);
                     break;
                 }
             }
         }
     }
     if(!flag)
-        this->ui->show_3->append("nothing found");
+        this->ui->show->append("nothing found");
+}
+
+
+void admin::on_num_textChanged(const QString &arg1)
+{
+
+    if(arg1 == nullptr)
+    {
+        this->ui->name->clear();
+        this->ui->author->clear();
+        this->ui->publisher->clear();
+        this->ui->group1->clear();
+        this->ui->group2->clear();
+        this->ui->group3->clear();
+        return;
+    }
+    bool isnum;
+    int value = arg1.toInt(&isnum);
+    if(isnum)
+    {
+        if(arg1.toInt() > info_book->count())
+        {
+            this->ui->show_3->setText("invalid number");
+            this->ui->num->clear();
+            return;
+        }
+        this->ui->name->setText(info_book->at(value - 1).name);
+        this->ui->author->setText(info_book->at(value - 1).author);
+        this->ui->publisher->setText(info_book->at(value - 1).publisher);
+        this->ui->group1->setText(info_book->at(value - 1).groups.at(0));
+        this->ui->group2->setText(info_book->at(value - 1).groups.at(1));
+        this->ui->group3->setText(info_book->at(value - 1).groups.at(2));
+    }
+    else
+    {
+        this->ui->show_3->setText("not number");
+        this->ui->num->clear();
+        return;
+    }
+
+
 }
 

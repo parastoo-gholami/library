@@ -71,6 +71,8 @@ MainWindow::~MainWindow()
             }
             qts<<info_book->at(i).available + "\n";
             qts<<info_book->at(i).who + "\n";
+            qts<<info_book->at(i).from + "\n";
+            qts<<info_book->at(i).to + "\n";
         }
         file.close();
     }

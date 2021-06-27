@@ -125,6 +125,7 @@ border :2px solid yellow;
 #amanat
 {
 color:yellow;
+	font: 10pt &quot;MS Gothic&quot;;
 }</string>
   </property>
   <widget class="QFrame" name="frame">
@@ -445,6 +446,31 @@ color:yellow;
     <property name="lineWidth">
      <number>1</number>
     </property>
+    <row>
+     <property name="text">
+      <string>New Row</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>New Row</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>New Row</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>New Row</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>New Row</string>
+     </property>
+    </row>
     <column>
      <property name="text">
       <string>name</string>

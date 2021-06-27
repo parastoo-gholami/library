@@ -56,10 +56,12 @@ void user::on_view_clicked()
         {
             for(int j = 0;j < 3;j++)
             {
-                if(j!=0)
-                    name.append(" ,");
                 if(info_book->at(i).groups.at(j) != nullptr)
+                {
+                    if(j!=0)
+                        name.append(" ,");
                     name.append(info_book->at(i).groups.at(j));
+                }
                 else
                     break;
             }

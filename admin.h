@@ -32,6 +32,8 @@ private slots:
 
     void on_ok_clicked();
 
+    void on_num_textChanged(const QString &arg1);
+
 private:
     Ui::admin *ui;
     QList<books>* info_book;

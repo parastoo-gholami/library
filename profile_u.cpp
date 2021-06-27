@@ -46,8 +46,15 @@ void profile_u::on_exit_clicked()
     }
     if(this->ui->username->text() != (*info_user)[index].user)
     {
+        for(int j = 0;j<info_book->count();j++)
+        {
+
+            if(info_book->at(j).who==info_user->at(index).user)
+                (*info_book)[j].who = this->ui->username->text();
+        }
         (*info_user)[index].user = this->ui->username->text();
         this->ui->textBrowser->setText("edited.");
+
     }
     if(this->ui->password->text() != "00000000")
     {
@@ -84,11 +91,15 @@ void profile_u::on_exit_3_clicked()
 void profile_u::on_exit_2_clicked()
 {
     int count = 0;
+//    if(this->ui->amanat->rowCount()!= 0)
+//        return;
     for(int i = 0;i<info_book->count();i++)
     {
-        if(info_book->at(i).who == info_user->at(i).user)
+        if(info_book->at(i).available == "yes")
+            continue;
+        if(info_book->at(i).who == info_user->at(index).user)
         {
-            this->ui->amanat->insertRow(this->ui->amanat->rowCount());
+            //this->ui->amanat->insertRow(ui->amanat->rowCount() + 1);
             QTableWidgetItem* x = new QTableWidgetItem(info_book->at(i).name);
             x->setTextAlignment(Qt::AlignCenter);
             this->ui->amanat->setItem(count,0,x);

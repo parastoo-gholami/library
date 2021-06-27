@@ -55,6 +55,8 @@ void load_b()
         }
         b.available = qts.readLine();
         b.who = qts.readLine();
+        b.from = qts.readLine();
+        b.to = qts.readLine();
         info_book.append(b);
     }
     file.close();
