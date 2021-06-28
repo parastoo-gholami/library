@@ -97,10 +97,12 @@ void user::on_borrow_clicked()
             QDate today(QDate::currentDate());
             (*info_book)[i].from = today.toString("dd.MM.yyyy");
             (*info_book)[i].to = today.addDays(10).toString("dd.MM.yyyy");
+            this->ui->nameofbook->clear();
             return;
         }
     }
     this->ui->show_2->setText("we don't have this book");
+    this->ui->nameofbook->clear();
     return;
 }
 
@@ -120,21 +122,25 @@ void user::on_returnbook_clicked()
                 (*info_user)[index].num--;
                 (*info_book)[i].who = "none";
                 this->ui->show_2->setText("done");
+                this->ui->nameofbook->clear();
+
             return;
             }
             this->ui->show_2->setText("you didn't borrow this book");
+            this->ui->nameofbook->clear();
+
             return;
         }
     }
     this->ui->show_2->setText("we don't have this book");
+    this->ui->nameofbook->clear();
+
     return;
 }
 void user::on_profile_clicked()
 {
-    //profile* page_p;
     profile_u* page_p;
     close();
-    //page_p = new profile(index,groups,info_book,info_user);
     page_p = new profile_u(index,groups,info_book,info_user);
     page_p->show();
 }

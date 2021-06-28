@@ -1,6 +1,7 @@
 #include "admin.h"
 #include "ui_admin.h"
 #include "mainwindow.h"
+#include "prifile_a.h"
 admin::admin(int index,QList<QString>* groups,QList<books>* info_book,QList<user_pass>* info_user,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::admin)
@@ -81,7 +82,7 @@ void admin::on_add_clicked()
     }
     if(this->ui->publisher->text() == nullptr)
     {
-        this->ui->show_3->setText("puclisher of the book?");
+        this->ui->show_3->setText("publisher of the book?");
         return;
     }
     for(int i = 0; i<info_book->length();i++)
@@ -122,7 +123,7 @@ void admin::on_add_clicked()
     tmp.groups.append(this->ui->group2->text());
     tmp.groups.append(this->ui->group3->text());
     info_book->append(tmp);
-    this->ui->show_3->setText("done");
+    this->ui->show_3->setText("done. press view to update the list");
 
 
     bool flag = false;
@@ -220,7 +221,7 @@ void admin::on_remove_clicked()
         flag = false;
     }
     info_book->removeAt((book_index));
-    this->ui->show_3->setText("press view to update the list");
+    this->ui->show_3->setText("done. press view to update the list");
     this->ui->num->clear();
     this->ui->name->clear();
     this->ui->author->clear();
@@ -351,7 +352,7 @@ void admin::on_edit_clicked()
         }
     }
 
-    this->ui->show_3->setText("done");
+    this->ui->show_3->setText("done. press view to update the list");
     this->ui->num->clear();
     this->ui->name->clear();
     this->ui->author->clear();
@@ -402,7 +403,7 @@ void admin::on_ok_clicked()
                     QString group;
                     group.append("  *");
                     group.append(groups->at(i));
-                    this->ui->show_3->append(group);
+                    this->ui->show->append(group);
                     for(int j = 0;j<info_book->count();j++)
                     {
                         for(int z = 0;z < 3;z++)
@@ -627,5 +628,14 @@ void admin::on_num_textChanged(const QString &arg1)
     }
 
 
+}
+
+
+void admin::on_profile_clicked()
+{
+    prifile_a* page_p;
+    close();
+    page_p = new prifile_a(index,groups,info_book,info_user);
+    page_p->show();
 }
 

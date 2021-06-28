@@ -13,6 +13,7 @@ profile_u::profile_u(int index,QList<QString>* groups,QList<books>* info_book,QL
     ui->amanat->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->amanat->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->amanat->verticalHeader()->hide();
+    this->ui->amanat->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->name->setText((*info_user)[index].name);
     ui->username->setText((*info_user)[index].user);
     ui->email->setText((*info_user)[index].email);
@@ -34,6 +35,11 @@ void profile_u::on_back_clicked()
 
 void profile_u::on_exit_clicked()
 {
+    if(this->ui->username->text().count()<5)
+    {
+        this->ui->textBrowser->setText("username is too short.");
+        return;
+    }
     if(this->ui->name->text() != (*info_user)[index].name)
     {
         (*info_user)[index].name = this->ui->name->text();
@@ -60,7 +66,7 @@ void profile_u::on_exit_clicked()
     {
         if(this->ui->password_2->text() == nullptr)
         {
-            this->ui->textBrowser->setText("for changing password you must fill rpeat password too.");
+            this->ui->textBrowser->setText("for changing password you must fill repeat password too.");
             return;
         }
         if(this->ui->password->text().length() <8)
@@ -75,6 +81,8 @@ void profile_u::on_exit_clicked()
         }
         (*info_user)[index].pass = this->ui->password->text();
         this->ui->textBrowser->setText("edited");
+        this->ui->password->setText("00000000");
+        this->ui->password_2->clear();
     }
 }
 
@@ -91,8 +99,8 @@ void profile_u::on_exit_3_clicked()
 void profile_u::on_exit_2_clicked()
 {
     int count = 0;
-//    if(this->ui->amanat->rowCount()!= 0)
-//        return;
+    if(this->ui->amanat->rowCount()!= 0)
+        return;
     for(int i = 0;i<info_book->count();i++)
     {
         if(info_book->at(i).available == "yes")

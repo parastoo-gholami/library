@@ -20,6 +20,8 @@ private slots:
 
     void on_exit_clicked();
 
+    void on_admin_stateChanged(int arg1);
+
 private:
     Ui::registration *ui;
     QList<user_pass>* info_user;

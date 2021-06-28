@@ -29,6 +29,11 @@ void registration::on_signup_clicked()
         this->ui->textBrowser->setText("please fill all the blanks.");
         return;
     }
+    if(this->ui->username->text() == "admin")
+    {
+        this->ui->textBrowser->setText("you can't choose this password");
+        return;
+    }
     if(this->ui->email->text() == nullptr)
     {
         this->ui->textBrowser->setText("please fill all the blanks.");
@@ -48,10 +53,15 @@ void registration::on_signup_clicked()
     {
         this->ui->textBrowser->setText("password is too short");
         return;
-    }
+    }    
     if((this->ui->username->text().length())<5)
     {
         this->ui->textBrowser->setText("username is too short");
+        return;
+    }
+    if(!(this->ui->email->text().contains("@")))
+    {
+        this->ui->textBrowser->setText("your email is wrong.");
         return;
     }
     if(this->ui->repassword->text() != this->ui->password->text())
@@ -95,5 +105,15 @@ void registration::on_exit_clicked()
     close();
     page_m = new MainWindow(groups,info_book,info_user);
     page_m->show();
+}
+
+
+void registration::on_admin_stateChanged(int arg1)
+{
+
+    if(arg1 == 2)
+        this->ui->username->setText("Admin");
+    else
+        this->ui->username->clear();
 }
 
