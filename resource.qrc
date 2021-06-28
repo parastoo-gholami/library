@@ -1,13 +1,6 @@
 <RCC>
     <qresource prefix="/first">
-        <file>library_registraion.png</file>
         <file>login.png</file>
-        <file>close.png</file>
-        <file>user.png</file>
-        <file>new.jpg</file>
-        <file>download.jpg</file>
-        <file>libraryj.jpg</file>
-        <file>libraryjk.jpg</file>
         <file>lib.jpg</file>
         <file>user_m.jpg</file>
     </qresource>

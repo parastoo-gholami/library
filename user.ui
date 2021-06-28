@@ -141,7 +141,7 @@ font:12pt &quot;Papyrus&quot;;
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="resource.qrc">
+     <iconset resource="parastoo/all projects/project3/resource.qrc">
       <normaloff>:/first/login.png</normaloff>:/first/login.png</iconset>
     </property>
     <property name="iconSize">
@@ -465,7 +465,7 @@ p, li { white-space: pre-wrap; }
   </widget>
  </widget>
  <resources>
-  <include location="resource.qrc"/>
+  <include location="parastoo/all projects/project3/resource.qrc"/>
  </resources>
  <connections/>
 </ui>

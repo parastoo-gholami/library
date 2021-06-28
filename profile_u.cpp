@@ -47,6 +47,11 @@ void profile_u::on_exit_clicked()
     }
     if(this->ui->email->text() != (*info_user)[index].email)
     {
+        if(!(this->ui->email->text().contains("@")))
+        {
+            this->ui->textBrowser->setText("email is wrong.");
+            return;
+        }
         (*info_user)[index].email = this->ui->email->text();
         this->ui->textBrowser->setText("edited.");
     }
@@ -99,8 +104,8 @@ void profile_u::on_exit_3_clicked()
 void profile_u::on_exit_2_clicked()
 {
     int count = 0;
-    if(this->ui->amanat->rowCount()!= 0)
-        return;
+//    if(this->ui->amanat->rowCount()!= 0)
+//        return;
     for(int i = 0;i<info_book->count();i++)
     {
         if(info_book->at(i).available == "yes")

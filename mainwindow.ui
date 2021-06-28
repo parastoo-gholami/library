@@ -116,6 +116,12 @@ color:red;
 {
 color:#379eff;
 
+}
+QCheckBox
+{
+background: transparent;
+color:#dddbff;
+font-size:13px;
 }</string>
   </property>
   <property name="toolButtonStyle">
@@ -128,10 +134,10 @@ color:#379eff;
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>30</y>
+      <x>230</x>
+      <y>40</y>
       <width>181</width>
-      <height>261</height>
+      <height>271</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -143,7 +149,7 @@ color:#379eff;
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>10</x>
        <y>20</y>
        <width>111</width>
        <height>31</height>
@@ -157,7 +163,7 @@ color:#379eff;
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>180</y>
+       <y>200</y>
        <width>161</width>
        <height>31</height>
       </rect>
@@ -211,7 +217,7 @@ color:#379eff;
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>210</y>
+       <y>230</y>
        <width>161</width>
        <height>31</height>
       </rect>
@@ -224,9 +230,9 @@ color:#379eff;
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
+       <y>50</y>
        <width>161</width>
-       <height>41</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -237,7 +243,7 @@ color:#379eff;
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>230</y>
+       <y>170</y>
        <width>161</width>
        <height>31</height>
       </rect>
@@ -246,11 +252,24 @@ color:#379eff;
       <string>forget your password?</string>
      </property>
     </widget>
+    <widget class="QCheckBox" name="checkBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>70</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>admin</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QToolButton" name="toolButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>300</x>
       <y>10</y>
       <width>41</width>
       <height>41</height>
