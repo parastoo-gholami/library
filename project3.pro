@@ -13,6 +13,7 @@ SOURCES += \
     forget_pass.cpp \
     main.cpp \
     mainwindow.cpp \
+    prifile_a.cpp \
     profile_u.cpp \
     registration.cpp \
     user.cpp
@@ -22,6 +23,7 @@ HEADERS += \
     forget_pass.h \
     libraries.h \
     mainwindow.h \
+    prifile_a.h \
     profile_u.h \
     registration.h \
     user.h
@@ -30,6 +32,7 @@ FORMS += \
     admin.ui \
     forget_pass.ui \
     mainwindow.ui \
+    prifile_a.ui \
     profile_u.ui \
     registration.ui \
     user.ui

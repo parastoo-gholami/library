@@ -634,7 +634,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>0</x>
       <y>220</y>
-      <width>171</width>
+      <width>421</width>
       <height>41</height>
      </rect>
     </property>
@@ -649,7 +649,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>171</width>
+       <width>421</width>
        <height>41</height>
       </rect>
      </property>
@@ -810,6 +810,19 @@ p, li { white-space: pre-wrap; }
     <enum>QFrame::Raised</enum>
    </property>
   </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>350</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>back</zorder>
   <zorder>white</zorder>
   <zorder>show_2</zorder>
@@ -824,6 +837,7 @@ p, li { white-space: pre-wrap; }
   <zorder>add</zorder>
   <zorder>edit</zorder>
   <zorder>remove</zorder>
+  <zorder>checkBox</zorder>
  </widget>
  <resources>
   <include location="resource.qrc"/>
